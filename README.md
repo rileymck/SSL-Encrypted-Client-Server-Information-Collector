@@ -19,7 +19,7 @@ InfoCollectionServer:
 
 EchoClient:
 
-- It establishes a secure connection to the server and handles user input
+-  It establishes a secure connection to the server and handles user input
 -  It sends the user's responses to the server and displays the server's prompts in the console
 
 ## Installation
@@ -29,42 +29,54 @@ Before you begin, ensure you have Java 8+ installed on your computer
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/rileymck/BabyTEA.git
-
+git clone https://github.com/rileymck/SSL-Encrypted-Client-Server-Information-Collector.git
 ```
 
 ### 2. Generate the server's keystore
 ``` bash
 keytool -genkeypair -alias serveralias -keyalg RSA -validity 365 -keystore testkeystore.p12 -storepass password -keypass password -storetype PKCS12
 ```
+- Answer the following prompts and comfirm its correct
 
 ### 3. Export the server's certificate
 ``` bash
 keytool -export -alias serveralias -file server.cer -keystore testkeystore.p12 -storepass password
 ```
+- You should see a "server.cer"
 
 ### 4. Create the client's truststore
 ``` bash 
 keytool -import -trustcacerts -alias serveralias -file server.cer -keystore clienttruststore.p12 -storepass password -storetype PKCS12
 ```
+- Say yes to trust the certificate
+- A file should also appear "clienttruststore.p12"
 
 ### 5. Compile InfoCollectionServer
 ``` bash 
 javac InfoCollectionServer.java
 ```
+- A "InfoCollectionServer.class" file should appear
 
 ### 6. Compile EchoClient
 ``` bash 
 javac EchoClient.java
 ```
+- A "EchoClient.class" file should appear
 
 ### 7. Run InfoCollectionServer
 ``` bash 
 java InfoCollectionServer 9999
 ```
+- Run this in the same terminal you did the other commands
+- It should say "Server is listening on port 9999"
 
 ### 8. Run EchoClient
 ``` bash 
 java EchoClient
 ```
+- On a different terminal type "java EchoClient"
+- Itll then come up with prompts, answer them
+- The more users you add the more .txt files youll have
+- At the end itll say "Thank you! Connection will now close"
+- A .txt file should have popped up with the answers you gave to the prompts 
 
